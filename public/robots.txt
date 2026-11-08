@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://saquib-ansari.dev/sitemap.xml
+

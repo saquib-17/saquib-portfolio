@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth dark">
+  <head>
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('portfolio-theme');
+          var theme = saved || 'dark';
+          if (theme === 'light') {
+            document.documentElement.classList.add('light');
+            document.documentElement.classList.remove('dark');
+          } else {
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Mohammed Saquib Ansari — Full-Stack Engineer & Algorithmic Developer. Currently pursuing MCA at PES University, Bengaluru. Explore conversational AI analytics, PostgreSQL architectures, and Java DSA."
+    />
+    <meta name="keywords" content="Mohammed Saquib Ansari, PES University, Full-Stack Developer, React, TypeScript, Node.js, PostgreSQL, Java, DSA, Groq Llama, DuckDB, Prisma ORM, Software Engineer Portfolio" />
+    <meta name="author" content="Mohammed Saquib Ansari" />
+    <meta name="theme-color" content="#0a192f" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://saquib-ansari.dev/" />
+    <meta property="og:title" content="Mohammed Saquib Ansari | Full-Stack Engineer & Systems Developer" />
+    <meta
+      property="og:description"
+      content="Full-Stack Engineer & Algorithmic Developer • Currently Pursuing MCA at PES University, Bengaluru. Explore featured software architectures, conversational AI analytics, and Java problem solving."
+    />
+    <meta property="og:image" content="/og-image.svg" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Mohammed Saquib Ansari | Full-Stack Engineer & Systems Developer" />
+    <meta
+      name="twitter:description"
+      content="Full-Stack Engineer & Algorithmic Developer • Currently Pursuing MCA at PES University, Bengaluru. Explore featured software architectures, conversational AI analytics, and Java problem solving."
+    />
+    <meta name="twitter:image" content="/og-image.svg" />
+
+    <!-- Google Fonts: Space Grotesk (Headings), Inter (Body) & JetBrains Mono (Code/Mono) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Mohammed Saquib Ansari | MCA Student & Full-Stack Developer</title>
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Mohammed Saquib Ansari",
+        "jobTitle": "Full-Stack Software Engineer",
+        "alumniOf": [
+          {
+            "@type": "EducationalOrganization",
+            "name": "PES University, Bengaluru"
+          }
+        ],
+        "knowsAbout": [
+          "Java",
+          "TypeScript",
+          "JavaScript",
+          "Python",
+          "React",
+          "Node.js",
+          "PostgreSQL",
+          "Prisma ORM",
+          "DuckDB",
+          "Data Structures & Algorithms",
+          "Tailwind CSS"
+        ],
+        "description": "Full-Stack Engineer and MCA Candidate at PES University, Bengaluru preparing for Software Development Engineering roles."
+      }
+    </script>
+  </head>
+  <body class="bg-[#08090D] text-[#F8FAFC] antialiased selection:bg-electric/30 selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

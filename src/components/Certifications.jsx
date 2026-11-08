@@ -90,18 +90,19 @@ export default function Certifications() {
                 </div>
 
                 {/* Footer: Date & View Action */}
-                <div className="mt-3.5 pt-2.5 border-t border-border flex items-center justify-between">
+                <div className="mt-3.5 pt-2.5 border-t border-border flex flex-col min-[380px]:flex-row min-[380px]:items-center justify-between gap-2">
                   <div className="flex items-center gap-1.5 text-[10.5px] font-mono text-foreground/50">
-                    <Calendar className="w-3 h-3 text-foreground/40" />
+                    <Calendar className="w-3 h-3 text-foreground/40 shrink-0" />
                     <span>Completion Date Pending</span>
                   </div>
 
                   <button
                     onClick={() => handleViewCertificate(cert)}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border border-cyan/40 bg-cyan/10 hover:bg-cyan/20 text-cyan text-[11px] font-mono font-semibold transition-all shadow-cyan-sm cursor-pointer"
+                    className="inline-flex items-center justify-center gap-1.5 px-2.5 py-1.5 min-[380px]:py-1 rounded-md border border-cyan/40 bg-cyan/10 hover:bg-cyan/20 text-cyan text-[11px] font-mono font-semibold transition-all shadow-cyan-sm cursor-pointer w-full min-[380px]:w-auto"
+                    aria-label={`View certificate details for ${cert.title}`}
                   >
                     <span>View Certificate</span>
-                    <ExternalLink className="w-3 h-3" />
+                    <ExternalLink className="w-3 h-3 shrink-0" />
                   </button>
                 </div>
               </motion.div>

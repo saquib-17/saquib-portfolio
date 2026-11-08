@@ -121,11 +121,13 @@ export default function Navbar({ onNavigateResume }) {
                 }`}
               >
                 {item.label}
-                <span
-                  className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${
-                    isActive ? 'w-full shadow-cyan-sm' : 'w-0 group-hover:w-full'
-                  }`}
-                />
+                {isActive && (
+                  <motion.span
+                    layoutId="navbar-active-pill"
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full shadow-cyan-sm"
+                    transition={{ type: 'spring', stiffness: 400, damping: 32 }}
+                  />
+                )}
               </button>
             )
           })}
@@ -157,21 +159,23 @@ export default function Navbar({ onNavigateResume }) {
           </a>
         </nav>
 
-        {/* Mobile Hamburger Button */}
-        <div className="flex items-center gap-3 md:hidden">
+        {/* Mobile Hamburger & Theme Controls */}
+        <div className="flex items-center gap-2 sm:gap-2.5 md:hidden">
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-full border border-border text-foreground/80"
-            aria-label="Toggle Theme"
+            className="p-2 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-full border border-border text-foreground/80 hover:text-primary transition-colors cursor-pointer"
+            aria-label={isLight ? 'Switch to dark theme' : 'Switch to light theme'}
+            title={isLight ? 'Switch to dark theme' : 'Switch to light theme'}
           >
-            {isLight ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
+            {isLight ? <Moon className="w-4 h-4 text-primary" /> : <Sun className="w-4 h-4 text-primary" />}
           </button>
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="p-2 rounded-lg border border-border text-foreground hover:text-primary transition-colors"
-            aria-label="Toggle Menu"
+            className="p-2 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg border border-border text-foreground hover:text-primary transition-colors cursor-pointer"
+            aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            title={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
           >
-            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
       </div>
@@ -183,19 +187,29 @@ export default function Navbar({ onNavigateResume }) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden mt-3 rounded-lg border border-border bg-card/95 backdrop-blur-xl p-5 shadow-glass overflow-hidden"
+            className="md:hidden mt-2 mx-3 sm:mx-6 rounded-xl border border-border bg-card/95 backdrop-blur-xl p-3.5 sm:p-5 shadow-glass overflow-hidden"
           >
-            <div className="flex flex-col space-y-4">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollTo(item.id)}
-                  className="text-left font-sans text-base font-semibold text-foreground hover:text-primary transition-colors"
-                >
-                  {item.label}
-                </button>
-              ))}
-              <div className="pt-2 border-t border-border">
+            <div className="flex flex-col space-y-1.5">
+              {navItems.map((item) => {
+                const isActive = activeSection === item.id
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => scrollTo(item.id)}
+                    className={`text-left font-sans text-sm sm:text-base font-medium transition-all px-3 py-2.5 rounded-lg flex items-center justify-between cursor-pointer ${
+                      isActive
+                        ? 'text-primary bg-primary/10 border border-primary/20 font-semibold shadow-cyan-sm'
+                        : 'text-foreground/85 hover:text-primary hover:bg-[var(--subtle-chip-bg)]'
+                    }`}
+                  >
+                    <span>{item.label}</span>
+                    {isActive && (
+                      <span className="h-2 w-2 rounded-full bg-primary shadow-cyan-sm shrink-0" />
+                    )}
+                  </button>
+                )
+              })}
+              <div className="pt-2 mt-1 border-t border-border">
                 <a
                   href="/resume"
                   onClick={(e) => {
@@ -208,7 +222,7 @@ export default function Navbar({ onNavigateResume }) {
                       window.dispatchEvent(new PopStateEvent('popstate'))
                     }
                   }}
-                  className="block text-center w-full py-2.5 font-mono text-xs font-bold uppercase tracking-wider text-primary border border-primary/50 rounded-md hover:bg-primary/10"
+                  className="block text-center w-full py-2.5 font-mono text-xs font-bold uppercase tracking-wider text-primary border border-primary/50 rounded-lg hover:bg-primary/10 transition-colors shadow-cyan-sm cursor-pointer"
                 >
                   View Resume
                 </a>

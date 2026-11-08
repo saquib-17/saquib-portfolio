@@ -12,9 +12,11 @@ import {
   Users,
   Globe2,
   BookOpen,
+  MapPin,
 } from 'lucide-react'
 import { Lottie } from 'lottie-react'
 import coderAnimationData from '../assets/coder.json'
+import FloatingGeometry from './FloatingGeometry.jsx'
 import { profile } from '../data/portfolio.js'
 
 export default function About({ onNavigateResume }) {
@@ -120,7 +122,7 @@ export default function About({ onNavigateResume }) {
               </div>
             </div>
 
-            <div className="mt-4 pt-3 border-t border-border flex items-center justify-between">
+            <div className="mt-4 pt-3 border-t border-border flex flex-col min-[420px]:flex-row min-[420px]:items-center justify-between gap-3">
               <a
                 href="/resume"
                 onClick={(e) => {
@@ -132,13 +134,14 @@ export default function About({ onNavigateResume }) {
                     window.dispatchEvent(new PopStateEvent('popstate'))
                   }
                 }}
-                className="btn-primary-glow !px-4 !py-1.5 !text-[11.5px] inline-flex items-center gap-1.5 cursor-pointer"
+                className="btn-primary-glow btn-shimmer !px-4 !py-2 !text-[12px] inline-flex items-center justify-center gap-1.5 whitespace-nowrap cursor-pointer shrink-0 w-full min-[420px]:w-auto"
               >
-                <Download className="w-3.5 h-3.5" />
+                <Download className="w-3.5 h-3.5 shrink-0" />
                 <span>View Resume</span>
               </a>
-              <span className="text-[11px] font-mono text-foreground/50">
-                Bengaluru, Karnataka
+              <span className="text-[11.5px] font-mono text-foreground/60 whitespace-nowrap inline-flex items-center gap-1.5 justify-center min-[420px]:justify-end">
+                <MapPin className="w-3.5 h-3.5 text-primary/70 shrink-0" />
+                <span>Bengaluru, Karnataka</span>
               </span>
             </div>
           </motion.div>
@@ -149,8 +152,11 @@ export default function About({ onNavigateResume }) {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: '-30px' }}
             transition={{ duration: 0.45, delay: 0.14 }}
-            className="md:col-span-1 glass-card p-3 flex flex-col items-center justify-center overflow-hidden group min-h-[170px]"
+            className="md:col-span-1 glass-card p-3 flex flex-col items-center justify-center overflow-hidden group min-h-[170px] relative"
           >
+            {/* Subtle Floating Geometric Accent Elements */}
+            <FloatingGeometry variant="about" />
+
             <div className="w-full h-full flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
               <Lottie
                 src={coderAnimationData}
@@ -186,7 +192,7 @@ export default function About({ onNavigateResume }) {
                 <p className="text-[10.5px] text-foreground/55 font-mono">
                   Bengaluru, Karnataka
                 </p>
-                <span className="inline-block mt-0.5 px-2 py-0.5 rounded-md text-[10px] font-mono font-medium text-primary bg-primary/10 border border-primary/30">
+                <span className="inline-block mt-0.5 px-2 py-0.5 rounded-md text-[10px] font-mono font-medium text-primary bg-primary/10 border border-primary/30 max-w-full break-words">
                   Currently Pursuing (First Semester) • 2026–2028
                 </span>
               </div>
@@ -203,7 +209,7 @@ export default function About({ onNavigateResume }) {
                 <p className="text-[10.5px] text-foreground/55 font-mono">
                   Graduation Year: 2026
                 </p>
-                <span className="inline-block mt-0.5 px-2 py-0.5 rounded-md text-[10px] font-mono font-medium text-secondary bg-secondary/10 border border-secondary/30">
+                <span className="inline-block mt-0.5 px-2 py-0.5 rounded-md text-[10px] font-mono font-medium text-secondary bg-secondary/10 border border-secondary/30 max-w-full break-words">
                   Graduated • CGPA: 9.14
                 </span>
               </div>
@@ -259,7 +265,7 @@ export default function About({ onNavigateResume }) {
               </span>
             </div>
 
-            <div className="grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+            <div className="grid gap-2 grid-cols-1 min-[340px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
               {interests.map((interest) => {
                 const Icon = interest.icon
                 return (

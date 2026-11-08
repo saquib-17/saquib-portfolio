@@ -10,6 +10,7 @@ import {
   ArrowUpRight,
   Github,
 } from 'lucide-react'
+import TechnicalGrid from './TechnicalGrid.jsx'
 import { userProjects } from '../data/portfolio.js'
 
 const PROJECT_ICONS = {
@@ -24,7 +25,10 @@ export default function Projects() {
   const additional = (userProjects.additional || []).filter((p) => p.enabled !== false)
 
   return (
-    <section id="projects" className="py-14 sm:py-16 relative">
+    <section id="projects" className="py-14 sm:py-16 relative overflow-hidden">
+      {/* Selective Technical Grid */}
+      <TechnicalGrid />
+
       <div className="max-w-[1140px] w-full mx-auto px-4 sm:px-6 md:px-12 lg:px-14 xl:px-6">
         {/* Section Header */}
         <motion.div
@@ -49,9 +53,10 @@ export default function Projects() {
                 key={project.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -4 }}
                 viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.4, delay: index * 0.08 }}
-                className="glass-card p-4 sm:p-5 lg:p-6 rounded-xl relative overflow-hidden transition-all duration-300 hover:border-cyan/35 group"
+                transition={{ duration: 0.35, delay: index * 0.08 }}
+                className="glass-card p-4 sm:p-5 lg:p-6 rounded-xl relative overflow-hidden transition-colors duration-300 hover:border-primary/50 group"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-center">
                   {/* Left: Prepared Preview Canvas (Proportionate, not oversized) */}
@@ -143,9 +148,10 @@ export default function Projects() {
                   key={item.id}
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
+                  whileHover={{ y: -3 }}
                   viewport={{ once: true, margin: '-30px' }}
-                  transition={{ duration: 0.4, delay: index * 0.08 }}
-                  className="glass-card p-4 sm:p-5 rounded-xl flex flex-col justify-between hover:border-cyan/40 transition-all duration-300 group"
+                  transition={{ duration: 0.35, delay: index * 0.08 }}
+                  className="glass-card p-4 sm:p-5 rounded-xl flex flex-col justify-between hover:border-cyan/40 transition-colors duration-300 group"
                 >
                   <div>
                     <div className="flex items-center justify-between pb-2.5">

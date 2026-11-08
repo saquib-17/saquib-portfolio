@@ -206,10 +206,10 @@ export default function Footer({ onNavigateResume }) {
           <button
             onClick={scrollToTop}
             aria-label="Scroll back to top"
-            className="p-2 rounded-lg border border-cyan/30 bg-cyan/5 hover:bg-cyan/15 hover:border-cyan text-cyan transition-all duration-200 flex items-center justify-center"
+            className="p-2 rounded-lg border border-cyan/30 bg-cyan/5 hover:bg-cyan/15 hover:border-cyan text-cyan transition-all duration-300 hover:-translate-y-1 hover:shadow-cyan-sm active:translate-y-0 flex items-center justify-center group cursor-pointer"
             title="Back to Top"
           >
-            <ArrowUp className="h-4 w-4" />
+            <ArrowUp className="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5" />
           </button>
         </div>
       </div>

@@ -20,17 +20,36 @@ export default function Experience() {
           </p>
         </motion.div>
 
-        {/* Experience Timeline Card matching reference design */}
-        <div className="max-w-3xl mx-auto space-y-4">
+        {/* Experience Timeline Container with Progressive Scroll Line */}
+        <div className="max-w-3xl mx-auto relative pl-0 sm:pl-6 space-y-4">
+          {/* Progressive Scroll Timeline Line */}
+          <motion.div
+            initial={{ scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="hidden sm:block absolute left-0 top-4 bottom-4 w-0.5 bg-gradient-to-b from-primary via-cyan to-secondary origin-top opacity-60 rounded-full"
+          />
+
           {internshipExperience.map((internship, index) => (
-            <motion.div
-              key={internship.id}
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.45, delay: index * 0.08 }}
-              className="glass-card p-4 sm:p-5 lg:p-6 rounded-xl hover:border-cyan/40 transition-all duration-300 group relative overflow-hidden"
-            >
+            <div key={internship.id} className="relative">
+              {/* Timeline Node Dot */}
+              <motion.span
+                initial={{ scale: 0, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.35, delay: 0.2 }}
+                className="hidden sm:block absolute -left-[27px] top-6 w-2.5 h-2.5 rounded-full bg-primary border-2 border-background shadow-cyan-sm z-10"
+              />
+
+              <motion.div
+                initial={{ opacity: 0, y: 18, x: -6 }}
+                whileInView={{ opacity: 1, y: 0, x: 0 }}
+                whileHover={{ y: -3 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.45, delay: index * 0.08 }}
+                className="glass-card p-4 sm:p-5 lg:p-6 rounded-xl hover:border-cyan/40 transition-colors duration-300 group relative overflow-hidden"
+              >
               {/* Top Accent Line */}
               <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary via-cyan to-secondary opacity-60" />
 
@@ -100,7 +119,8 @@ export default function Experience() {
                 ))}
               </div>
             </motion.div>
-          ))}
+          </div>
+        ))}
         </div>
       </div>
     </section>

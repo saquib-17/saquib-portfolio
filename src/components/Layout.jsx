@@ -4,18 +4,23 @@ import SocialSidebar from './SocialSidebar.jsx'
 import SectionIndicator from './SectionIndicator.jsx'
 import EmailSidebar from './EmailSidebar.jsx'
 import DeveloperBackground from './DeveloperBackground.jsx'
+import AuroraBackground from './AuroraBackground.jsx'
 import CursorGlow from './CursorGlow.jsx'
 import ScrollProgress from './ScrollProgress.jsx'
 
 /**
  * Global Layout Shell
- * Houses Navbar, Left Social Sidebar, Right Section Indicator, Right Email Sidebar, ambient canvas, and footer.
+ * Houses Navbar, Left Social Sidebar, Right Section Indicator, Right Email Sidebar,
+ * ambient aurora, ambient canvas, and footer.
  */
 export default function Layout({ children, onNavigateResume }) {
   return (
     <div id="top" className="relative min-h-screen w-full overflow-x-hidden bg-background text-foreground antialiased selection:bg-primary/25 selection:text-primary">
       {/* Scroll Reading Progress Bar */}
       <ScrollProgress />
+
+      {/* Ambient Aurora Gradient Lighting */}
+      <AuroraBackground />
 
       {/* Living Ambient Canvas Background */}
       <DeveloperBackground />

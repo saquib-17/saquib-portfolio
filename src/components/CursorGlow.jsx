@@ -1,22 +1,36 @@
 import { useEffect, useRef, useState } from 'react'
+import { useTheme } from '../context/ThemeContext.jsx'
 
 /**
- * Desktop subtle ambient cursor spotlight in Cyan / Dark Teal.
+ * Ambient Cursor Spotlight & Mobile Static Fallback
+ * Features smoothly interpolated cursor tracking on desktop fine-pointer devices,
+ * and falls back to a calm static ambient glow on mobile/touch screens or reduced motion.
  */
 export default function CursorGlow() {
   const glowRef = useRef(null)
-  const [isEnabled, setIsEnabled] = useState(false)
+  const [hasFinePointer, setHasFinePointer] = useState(false)
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+  const { isLight } = useTheme()
 
   useEffect(() => {
-    const hasFinePointer = window.matchMedia('(pointer: fine)').matches
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const finePointerQuery = window.matchMedia('(pointer: fine)')
+    const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
 
-    if (!hasFinePointer || prefersReducedMotion) {
-      setIsEnabled(false)
-      return
+    setHasFinePointer(finePointerQuery.matches)
+    setPrefersReducedMotion(reducedMotionQuery.matches)
+
+    const handlePointerChange = (e) => setHasFinePointer(e.matches)
+    const handleMotionChange = (e) => setPrefersReducedMotion(e.matches)
+
+    finePointerQuery.addEventListener('change', handlePointerChange)
+    reducedMotionQuery.addEventListener('change', handleMotionChange)
+
+    if (!finePointerQuery.matches || reducedMotionQuery.matches) {
+      return () => {
+        finePointerQuery.removeEventListener('change', handlePointerChange)
+        reducedMotionQuery.removeEventListener('change', handleMotionChange)
+      }
     }
-
-    setIsEnabled(true)
 
     let mouseX = window.innerWidth / 2
     let mouseY = window.innerHeight / 2
@@ -32,11 +46,12 @@ export default function CursorGlow() {
     window.addEventListener('mousemove', handleMouseMove, { passive: true })
 
     const animate = () => {
-      currentX += (mouseX - currentX) * 0.08
-      currentY += (mouseY - currentY) * 0.08
+      // Smooth lerp interpolation
+      currentX += (mouseX - currentX) * 0.07
+      currentY += (mouseY - currentY) * 0.07
 
       if (glowRef.current) {
-        glowRef.current.style.transform = `translate3d(${currentX - 250}px, ${currentY - 250}px, 0)`
+        glowRef.current.style.transform = `translate3d(${currentX - 260}px, ${currentY - 260}px, 0)`
       }
 
       rafId = requestAnimationFrame(animate)
@@ -46,21 +61,38 @@ export default function CursorGlow() {
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)
+      finePointerQuery.removeEventListener('change', handlePointerChange)
+      reducedMotionQuery.removeEventListener('change', handleMotionChange)
       cancelAnimationFrame(rafId)
     }
   }, [])
 
-  if (!isEnabled) return null
+  // Static ambient glow for touch devices and reduced-motion mode
+  if (!hasFinePointer || prefersReducedMotion) {
+    return (
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed top-10 left-1/2 -translate-x-1/2 -z-10 h-[380px] w-[380px] rounded-full blur-[75px] opacity-25"
+        style={{
+          background: isLight
+            ? 'radial-gradient(circle, rgba(22, 166, 173, 0.15) 0%, rgba(22, 166, 173, 0) 70%)'
+            : 'radial-gradient(circle, rgba(44, 196, 201, 0.18) 0%, rgba(44, 196, 201, 0) 70%)',
+        }}
+      />
+    )
+  }
 
+  // Interactive interpolated cursor glow for desktop
   return (
     <div
       ref={glowRef}
       aria-hidden="true"
-      className="pointer-events-none fixed top-0 left-0 z-10 h-[500px] w-[500px] rounded-full will-change-transform opacity-50"
+      className="pointer-events-none fixed top-0 left-0 -z-10 h-[520px] w-[520px] rounded-full will-change-transform transition-opacity duration-300"
       style={{
-        background:
-          'radial-gradient(circle, rgba(100, 255, 218, 0.08) 0%, rgba(2, 12, 27, 0) 70%)',
-        filter: 'blur(45px)',
+        background: isLight
+          ? 'radial-gradient(circle, rgba(22, 166, 173, 0.10) 0%, rgba(255, 255, 255, 0) 70%)'
+          : 'radial-gradient(circle, rgba(44, 196, 201, 0.12) 0%, rgba(2, 12, 27, 0) 70%)',
+        filter: 'blur(55px)',
       }}
     />
   )

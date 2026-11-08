@@ -137,33 +137,36 @@ export default function Contact() {
             </div>
 
             {/* Quick Social Buttons */}
-            <div className="flex items-center gap-2 w-full">
+            <div className="flex flex-wrap min-[360px]:flex-nowrap items-center gap-2 w-full">
               <a
                 href={socialLinks.github}
                 target="_blank"
                 rel="noreferrer"
-                className="flex-1 flex items-center justify-center gap-1.5 py-1.5 px-2.5 rounded-lg border border-border bg-[var(--subtle-chip-bg)] hover:border-primary/40 hover:bg-primary/10 text-[11px] font-mono text-foreground/80 hover:text-primary transition-all"
+                aria-label="GitHub profile"
+                className="flex-1 min-w-[80px] flex items-center justify-center gap-1.5 py-1.5 px-2.5 rounded-lg border border-border bg-[var(--subtle-chip-bg)] hover:border-primary/40 hover:bg-primary/10 text-[11px] font-mono text-foreground/80 hover:text-primary transition-all"
               >
-                <Github className="h-3.5 w-3.5" />
-                <span>GitHub</span>
+                <Github className="h-3.5 w-3.5 shrink-0" />
+                <span className="truncate">GitHub</span>
               </a>
               <a
                 href={socialLinks.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="flex-1 flex items-center justify-center gap-1.5 py-1.5 px-2.5 rounded-lg border border-border bg-[var(--subtle-chip-bg)] hover:border-primary/40 hover:bg-primary/10 text-[11px] font-mono text-foreground/80 hover:text-primary transition-all"
+                aria-label="LinkedIn profile"
+                className="flex-1 min-w-[80px] flex items-center justify-center gap-1.5 py-1.5 px-2.5 rounded-lg border border-border bg-[var(--subtle-chip-bg)] hover:border-primary/40 hover:bg-primary/10 text-[11px] font-mono text-foreground/80 hover:text-primary transition-all"
               >
-                <Linkedin className="h-3.5 w-3.5" />
-                <span>LinkedIn</span>
+                <Linkedin className="h-3.5 w-3.5 shrink-0" />
+                <span className="truncate">LinkedIn</span>
               </a>
               <a
                 href={socialLinks.leetcode}
                 target="_blank"
                 rel="noreferrer"
-                className="flex-1 flex items-center justify-center gap-1.5 py-1.5 px-2.5 rounded-lg border border-border bg-[var(--subtle-chip-bg)] hover:border-primary/40 hover:bg-primary/10 text-[11px] font-mono text-foreground/80 hover:text-primary transition-all"
+                aria-label="LeetCode profile"
+                className="flex-1 min-w-[80px] flex items-center justify-center gap-1.5 py-1.5 px-2.5 rounded-lg border border-border bg-[var(--subtle-chip-bg)] hover:border-primary/40 hover:bg-primary/10 text-[11px] font-mono text-foreground/80 hover:text-primary transition-all"
               >
-                <Code2 className="h-3.5 w-3.5" />
-                <span>LeetCode</span>
+                <Code2 className="h-3.5 w-3.5 shrink-0" />
+                <span className="truncate">LeetCode</span>
               </a>
             </div>
           </motion.div>

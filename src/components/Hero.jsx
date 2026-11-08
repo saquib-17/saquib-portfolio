@@ -5,6 +5,8 @@ import { Lottie } from 'lottie-react'
 import { useTheme } from '../context/ThemeContext.jsx'
 import heroAnimationDark from '../assets/hero-animation-dark.json'
 import heroAnimationLight from '../assets/hero-animation-light.json'
+import HeroParticleNetwork from './HeroParticleNetwork.jsx'
+import FloatingGeometry from './FloatingGeometry.jsx'
 import { hero } from '../data/portfolio.js'
 
 export default function Hero() {
@@ -46,6 +48,9 @@ export default function Hero() {
       className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20 sm:pt-24 pb-12 sm:pb-14 text-center md:text-left"
       style={{ background: 'var(--gradient-hero)' }}
     >
+      {/* Interactive Particle Network behind content */}
+      <HeroParticleNetwork />
+
       {/* Ambient Layered Glows for Depth */}
       <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[280px] bg-primary/10 rounded-full blur-[120px] pointer-events-none -z-10" />
       <div className="absolute top-1/3 right-1/4 w-[380px] h-[260px] bg-secondary/10 rounded-full blur-[110px] pointer-events-none -z-10" />
@@ -108,17 +113,17 @@ export default function Hero() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.24 }}
-              className="relative z-10 flex flex-col sm:flex-row gap-3.5 justify-center md:justify-start mt-6 sm:mt-7"
+              className="relative z-10 flex flex-col sm:flex-row gap-3 sm:gap-3.5 justify-center md:justify-start mt-5 sm:mt-7 max-w-xs sm:max-w-none mx-auto md:mx-0 w-full"
             >
               <button
                 onClick={() => scrollTo('projects')}
-                className="btn-primary-glow flex items-center justify-center gap-2 group cursor-pointer"
+                className="btn-primary-glow btn-shimmer min-h-[44px] flex items-center justify-center gap-2 group cursor-pointer w-full sm:w-auto"
               >
                 <span>VIEW MY WORK</span>
               </button>
               <button
                 onClick={() => scrollTo('contact')}
-                className="btn-secondary-glow flex items-center justify-center gap-2 group cursor-pointer"
+                className="btn-secondary-glow btn-shimmer min-h-[44px] flex items-center justify-center gap-2 group cursor-pointer w-full sm:w-auto"
               >
                 <span>GET IN TOUCH</span>
               </button>
@@ -130,7 +135,7 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="flex items-center justify-center relative group"
+            className="flex items-center justify-center relative group mt-4 md:mt-0"
           >
             {/* Ambient Radial Halo Backdrop */}
             <div
@@ -147,12 +152,15 @@ export default function Hero() {
               transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
               className="relative z-10 w-full flex items-center justify-center"
             >
+              {/* Subtle Floating Geometric Accent Elements */}
+              <FloatingGeometry variant="hero" />
+
               <Lottie
                 key={isLight ? 'hero-light' : 'hero-dark'}
                 src={animationData}
                 loop={true}
                 autoplay={true}
-                className="w-full h-auto max-w-[300px] sm:max-w-[340px] lg:max-w-[380px] drop-shadow-md select-none pointer-events-none"
+                className="w-full h-auto max-w-[240px] sm:max-w-[300px] lg:max-w-[380px] drop-shadow-md select-none pointer-events-none"
               />
             </motion.div>
           </motion.div>

@@ -23,6 +23,7 @@ import { FaJava } from 'react-icons/fa'
 import { TbSql, TbBrandVercel } from 'react-icons/tb'
 import { VscCode } from 'react-icons/vsc'
 import { Layers, Server, Sparkles, BookOpen } from 'lucide-react'
+import TechnicalGrid from './TechnicalGrid.jsx'
 import { currentlyLearning } from '../data/portfolio.js'
 
 const BRAND_COLORS_DARK = {
@@ -136,7 +137,10 @@ export default function Skills() {
   const brandColors = isLight ? BRAND_COLORS_LIGHT : BRAND_COLORS_DARK
 
   return (
-    <section id="skills" className="py-14 sm:py-16 relative">
+    <section id="skills" className="py-14 sm:py-16 relative overflow-hidden">
+      {/* Selective Technical Blueprint Grid */}
+      <TechnicalGrid />
+
       <div className="max-w-[1140px] w-full mx-auto px-4 sm:px-6 md:px-12 lg:px-14 xl:px-6">
         {/* Section Header */}
         <motion.div
@@ -169,7 +173,7 @@ export default function Skills() {
 
           <div className="relative z-10 flex flex-col md:flex-row gap-4 lg:gap-6 items-start">
             {/* Left Column: Category Tabs Selector */}
-            <div className="w-full md:w-44 lg:w-48 shrink-0 flex flex-row md:flex-col gap-1.5 overflow-x-auto md:overflow-visible pb-2 md:pb-0">
+            <div className="w-full md:w-44 lg:w-48 shrink-0 flex flex-row md:flex-col gap-1.5 overflow-x-auto md:overflow-visible pb-2 md:pb-0 scrollbar-none">
               {CATEGORIES.map((category) => {
                 const isActive = activeCategory === category.id
                 return (
@@ -178,7 +182,7 @@ export default function Skills() {
                     onClick={() => setActiveCategory(category.id)}
                     className={`w-full text-left px-3 py-2 rounded-md text-[11px] sm:text-xs font-mono font-medium tracking-wide uppercase transition-all duration-200 whitespace-nowrap focus:outline-none cursor-pointer ${
                       isActive
-                        ? 'bg-primary text-primary-foreground shadow-cyan-sm font-semibold border border-primary/80 translate-x-1'
+                        ? 'bg-primary text-primary-foreground shadow-cyan-sm font-semibold border border-primary/80 md:translate-x-1'
                         : 'bg-[var(--subtle-chip-bg)] hover:bg-card border border-border text-foreground/75 hover:text-primary hover:border-primary/40'
                     }`}
                   >
@@ -207,8 +211,9 @@ export default function Skills() {
                         key={skill.name}
                         initial={{ opacity: 0, scale: 0.92 }}
                         animate={{ opacity: 1, scale: 1 }}
+                        whileHover={{ y: -3, scale: 1.02 }}
                         transition={{ duration: 0.18, delay: index * 0.03 }}
-                        className="p-2.5 rounded-lg border border-border bg-[var(--subtle-chip-bg)] hover:bg-card flex flex-col items-center justify-center gap-1 min-h-[76px] sm:min-h-[80px] transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-cyan-sm group cursor-default"
+                        className="p-2.5 rounded-lg border border-border bg-[var(--subtle-chip-bg)] hover:bg-card flex flex-col items-center justify-center gap-1 min-h-[76px] sm:min-h-[80px] transition-colors duration-200 hover:border-primary/50 hover:shadow-cyan-sm group cursor-default"
                       >
                         <div className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-md bg-[var(--inner-box-bg)] border border-border group-hover:scale-105 transition-transform duration-200">
                           <IconComponent

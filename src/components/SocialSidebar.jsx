@@ -28,7 +28,7 @@ export default function SocialSidebar() {
               target="_blank"
               rel="noreferrer"
               aria-label={item.name}
-              className="text-foreground/60 hover:text-primary transition-all duration-300 hover:-translate-y-1 hover:drop-shadow-[0_0_8px_rgba(44,196,201,0.6)]"
+              className="text-foreground/60 hover:text-primary transition-all duration-300 hover:-translate-y-1.5 hover:scale-110 hover:drop-shadow-[0_0_10px_rgba(44,196,201,0.65)] cursor-pointer"
             >
               <Icon size={20} />
             </a>

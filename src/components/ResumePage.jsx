@@ -18,29 +18,34 @@ import { useTheme } from '../context/ThemeContext.jsx'
 import { profile } from '../data/portfolio.js'
 
 export default function ResumePage({ onBackToPortfolio }) {
-  const [pdfAvailable, setPdfAvailable] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [pdfAvailable, setPdfAvailable] = useState(true)
+  const [loading, setLoading] = useState(false)
   const { isLight, toggleTheme } = useTheme()
 
-  const pdfUrl = '/mohammed_saquib_ansari_resume.pdf'
+  const pdfUrl = '/resume.pdf'
 
   useEffect(() => {
     window.scrollTo(0, 0)
 
-    // Check if resume.pdf is physically present in /public
+    // Verify resume.pdf is physically available and not returning SPA index.html
     fetch(pdfUrl, { method: 'HEAD' })
       .then((res) => {
-        if (res.ok && res.headers.get('content-type')?.includes('pdf')) {
-          setPdfAvailable(true)
-        } else if (res.ok && res.status === 200) {
-          const ct = res.headers.get('content-type') || ''
-          setPdfAvailable(ct.includes('pdf'))
+        if (res.ok) {
+          const ct = (res.headers.get('content-type') || '').toLowerCase()
+          // If the server returns text/html, it routed to the SPA fallback
+          if (ct.includes('text/html')) {
+            setPdfAvailable(false)
+          } else {
+            setPdfAvailable(true)
+          }
         } else {
           setPdfAvailable(false)
         }
       })
-      .catch(() => setPdfAvailable(false))
-      .finally(() => setLoading(false))
+      .catch(() => {
+        // Fallback gracefully to true so iframe can load even if HEAD is restricted
+        setPdfAvailable(true)
+      })
   }, [pdfUrl])
 
   return (

@@ -122,7 +122,7 @@ export default function About({ onNavigateResume }) {
               </div>
             </div>
 
-            <div className="mt-4 pt-3 border-t border-border flex flex-col min-[420px]:flex-row min-[420px]:items-center justify-between gap-3">
+            <div className="mt-4 pt-3 border-t border-border flex flex-wrap items-center justify-between gap-3">
               <a
                 href="/resume"
                 onClick={(e) => {
@@ -134,12 +134,12 @@ export default function About({ onNavigateResume }) {
                     window.dispatchEvent(new PopStateEvent('popstate'))
                   }
                 }}
-                className="btn-primary-glow btn-shimmer !px-4 !py-2 !text-[12px] inline-flex items-center justify-center gap-1.5 whitespace-nowrap cursor-pointer shrink-0 w-full min-[420px]:w-auto"
+                className="btn-primary-glow btn-shimmer !px-4 !py-2 !text-[12px] inline-flex items-center justify-center gap-1.5 whitespace-nowrap cursor-pointer shrink-0"
               >
                 <Download className="w-3.5 h-3.5 shrink-0" />
-                <span>View Resume</span>
+                <span className="whitespace-nowrap font-semibold">View Resume</span>
               </a>
-              <span className="text-[11.5px] font-mono text-foreground/60 whitespace-nowrap inline-flex items-center gap-1.5 justify-center min-[420px]:justify-end">
+              <span className="text-[11.5px] font-mono text-foreground/60 whitespace-nowrap inline-flex items-center gap-1.5 shrink-0">
                 <MapPin className="w-3.5 h-3.5 text-primary/70 shrink-0" />
                 <span>Bengaluru, Karnataka</span>
               </span>

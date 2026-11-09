@@ -198,7 +198,7 @@ export default function ResumePage({ onBackToPortfolio }) {
                   Education
                 </p>
                 <p className="text-xs font-mono text-foreground/90 truncate font-medium">
-                  PES University • MCA (2024–2026)
+                  PES University • MCA (2026–2028)
                 </p>
               </div>
             </div>
